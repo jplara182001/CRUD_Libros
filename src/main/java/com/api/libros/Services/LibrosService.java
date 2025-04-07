@@ -22,7 +22,7 @@ public class LibrosService {
 
     private final LibrosRepository librosRepository;
 
-    public LibrosService(LibrosRepository librosRepository){
+    public LibrosService(LibrosRepository librosRepository) {
         this.librosRepository = librosRepository;
     }
 
@@ -39,10 +39,9 @@ public class LibrosService {
     public ResponseEntity<Map<String, Object>> getLibroById(UUID id) {
         Optional<LibrosEntity> libro = librosRepository.findById(id);
         return libro.map(value -> ResponseEntity.ok(Collections.singletonMap("Libro", (Object) value)))
-                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                                   .body(Collections.singletonMap("Status", "Libro no encontrado.")));
-    }    
-
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Collections.singletonMap("Status", "Libro no encontrado.")));
+    }
 
     public ResponseEntity<?> getLibrosByTitulo(String titulo, int page, int size, String[] sortParams) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(parseSort(sortParams)));
@@ -54,14 +53,14 @@ public class LibrosService {
         libroToAdd.setId(UUID.randomUUID());
         LibrosEntity saved = librosRepository.save(libroToAdd);
         return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(Collections.singletonMap("Status", "Libro agregado con ID " + saved.getId()));
+                .body(Collections.singletonMap("Status", "Libro agregado con ID " + saved.getId()));
     }
 
     public ResponseEntity<?> updateLibro(UUID id, LibrosEntity libroToUpdate) {
         Optional<LibrosEntity> libro = librosRepository.findById(id);
         if (libro.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body(Collections.singletonMap("Status", "Libro no encontrado."));
+                    .body(Collections.singletonMap("Status", "Libro no encontrado."));
         }
 
         LibrosEntity existing = libro.get();
@@ -77,7 +76,7 @@ public class LibrosService {
     public ResponseEntity<?> deleteLibro(UUID id) {
         if (!librosRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body(Collections.singletonMap("Status", "Libro no encontrado."));
+                    .body(Collections.singletonMap("Status", "Libro no encontrado."));
         }
 
         librosRepository.deleteById(id);

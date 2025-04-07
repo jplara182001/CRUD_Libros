@@ -24,15 +24,15 @@ public class LibrosController {
 
     private final LibrosService librosService;
 
-    public LibrosController(LibrosService librosService){
+    public LibrosController(LibrosService librosService) {
         this.librosService = librosService;
     }
 
     @GetMapping
     public ResponseEntity<?> getAllLibros(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "5") int size,
-        @RequestParam(defaultValue = "titulo,asc") String[] sort) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "titulo,asc") String[] sort) {
         return librosService.getAllLibros(page, size, sort);
     }
 
@@ -42,19 +42,13 @@ public class LibrosController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchLibrosByTitulo(
-        @RequestParam String titulo,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "5") int size,
-        @RequestParam(defaultValue = "titulo,asc") String[] sort) {
+    public ResponseEntity<?> getLibrosByTitulo(
+            @RequestParam String titulo,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "titulo,asc") String[] sort) {
         return librosService.getLibrosByTitulo(titulo, page, size, sort);
     }
-
-    @GetMapping("/hello")
-public String hello() {
-    return "Hola desde Spring Boot";
-}
-
 
     @PostMapping
     public ResponseEntity<?> insertLibro(@Valid @RequestBody LibrosEntity libro) {

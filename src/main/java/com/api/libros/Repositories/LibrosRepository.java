@@ -13,5 +13,4 @@ public interface LibrosRepository extends JpaRepository<LibrosEntity, UUID> {
 
     Page<LibrosEntity> findAllByTituloContainingIgnoreCase(String titulo, Pageable pageable);
 
-
 }
