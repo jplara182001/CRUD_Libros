@@ -1,4 +1,4 @@
-package com.Controllers;
+package com.api.libros.Controllers;
 
 import jakarta.validation.Valid;
 
@@ -49,6 +49,12 @@ public class LibrosController {
         @RequestParam(defaultValue = "titulo,asc") String[] sort) {
         return librosService.getLibrosByTitulo(titulo, page, size, sort);
     }
+
+    @GetMapping("/hello")
+public String hello() {
+    return "Hola desde Spring Boot";
+}
+
 
     @PostMapping
     public ResponseEntity<?> insertLibro(@Valid @RequestBody LibrosEntity libro) {

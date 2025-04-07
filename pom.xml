@@ -55,9 +55,15 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.0.33</version>
+</dependency>
+		<dependency>
     		<groupId>jakarta.validation</groupId>
     		<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
+		
 
 	</dependencies>
 
